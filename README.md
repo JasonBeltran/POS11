@@ -2,6 +2,7 @@
 Point of Sale System - Team 11 - Uma
 
 🛒 POS-Based Marketplace System
+
 📌 Overview
 This project is a Point-of-Sale (POS) based marketplace where suppliers can list items for sale, and users can browse and purchase them. Suppliers manage their own hub/page, while users can create accounts to explore and buy products seamlessly.
 
