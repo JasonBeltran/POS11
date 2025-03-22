@@ -1,0 +1,343 @@
+:root {
+    --primary-color: #18333d; /* Main yellow */
+    --secondary-color: #e3ecee; /* Light yellow */
+    --accent-color: #00ff88; /* Darker yellow/orange */
+    --text-color: #333333;
+    --border-color: #e3ecee; /* Light yellow border */
+    --success-color: #00ffbf; /* Gold yellow */
+    --hover-color: #32fff8; /* Bright yellow for hover states */
+    --dark-accent: #00adcc; /* Dark yellow/brown for contrast */
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background-color: #cde7ec; /* Very light yellow background */
+    color: var(--text-color);
+}
+
+/* Main container layout */
+.container {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* New Top Navigation Bar - eBay style */
+.top-nav {
+    display: flex;
+    align-items: center;
+    padding: 10px 20px;
+    background-color: var(--primary-color);
+    border-bottom: 1px solid var(--border-color);
+    height: 70px;
+}
+
+.toggle-sidebar {
+    background: none;
+    border: none;
+    color: var(--dark-accent);
+    font-size: 24px;
+    cursor: pointer;
+    margin-right: 10px;
+}
+
+.logo {
+    font-size: 24px;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    margin-right: 20px;
+    color: var(--dark-accent);
+}
+
+.logo i {
+    margin-right: 10px;
+}
+
+/* Search bar styling - centered */
+.search-container {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.search-bar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+    max-width: 600px;
+}
+
+.search-input {
+    width: 100%;
+    padding: 10px 20px;
+    border: 2px solid #ccc;
+    border-radius: 25px 0 0 25px;
+    outline: none;
+    font-size: 16px;
+}
+
+.search-button {
+    padding: 10px 20px;
+    border: 2px solid #ccc;
+    border-left: none;
+    border-radius: 0 25px 25px 0;
+    background-color: #007bff;
+    color: white;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.search-button i {
+    margin-right: 5px;
+}
+
+.search-button:hover {
+    background-color: #0056b3;
+}
+
+/* User controls */
+.user-controls {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.cart-button {
+    background-color: var(--accent-color);
+    color: white;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    border: none;
+    transition: background-color 0.2s;
+}
+
+.cart-button:hover {
+    background-color: var(--dark-accent);
+}
+
+.user-info {
+    display: flex;
+    align-items: center;
+}
+
+.user-info img {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+
+/* Categories bar - like eBay */
+.categories-bar {
+    display: flex;
+    background-color: #fff;
+    padding: 0 20px;
+    overflow-x: auto;
+    border-bottom: 1px solid var(--border-color);
+    white-space: nowrap;
+}
+
+.category-tab {
+    padding: 12px 15px;
+    cursor: pointer;
+    border-bottom: 3px solid transparent;
+    color: var(--text-color);
+    font-size: 14px;
+}
+
+.category-tab.active {
+    border-bottom-color: var(--accent-color);
+    font-weight: bold;
+}
+
+.category-tab:hover {
+    border-bottom-color: var(--hover-color);
+}
+
+/* Main content layout with sidebar */
+.main-area {
+    display: flex;
+    flex: 1;
+}
+
+/* Sidebar styling */
+.sidebar {
+    background-color: var(--secondary-color);
+    width: 250px;
+    border-right: 1px solid var(--border-color);
+    transition: transform 0.3s ease, width 0.3s ease;
+    overflow-y: auto;
+    height: calc(100vh - 115px); /* Account for top nav and categories */
+    position: fixed;
+    top: 115px;
+    left: 0;
+    z-index: 10;
+}
+
+/* Collapsed sidebar */
+.sidebar.collapsed {
+    transform: translateX(-250px);
+    width: 0;
+}
+
+.sidebar-menu {
+    list-style: none;
+}
+
+.sidebar-menu li {
+    padding: 12px 20px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    transition: background-color 0.2s;
+}
+
+.sidebar-menu li:hover {
+    background-color: var(--hover-color);
+}
+
+.sidebar-menu li.active {
+    background-color: var(--hover-color);
+    border-left: 4px solid var(--accent-color);
+}
+
+.sidebar-menu li i {
+    margin-right: 10px;
+    color: var(--dark-accent);
+    width: 20px;
+    text-align: center;
+}
+
+/* Main content */
+.main-content {
+    flex: 1;
+    padding: 20px;
+    transition: margin-left 0.3s ease;
+    margin-left: 250px; /* Same as sidebar width */
+}
+
+.main-content.full-width {
+    margin-left: 0;
+}
+
+/* Filter options */
+.filter-options {
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.filter-label {
+    font-weight: bold;
+}
+
+.filter-select {
+    padding: 8px 12px;
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    background-color: white;
+}
+
+/* Product grid */
+.product-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 20px;
+}
+
+.product-card {
+    background-color: white;
+    border-radius: 6px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+    overflow: hidden;
+    transition: transform 0.2s, box-shadow 0.2s;
+    cursor: pointer;
+    border: 1px solid var(--border-color);
+}
+
+.product-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    border-color: var(--primary-color);
+}
+
+.product-image {
+    height: 150px;
+    background-color: var(--secondary-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.product-image img {
+    max-width: 90%;
+    max-height: 90%;
+    object-fit: contain;
+}
+
+.product-details {
+    padding: 15px;
+}
+
+.product-title {
+    font-weight: bold;
+    margin-bottom: 5px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.product-price {
+    color: var(--dark-accent);
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.product-inventory {
+    font-size: 12px;
+    color: #666;
+    margin-top: 5px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .top-nav {
+        flex-wrap: wrap;
+        height: auto;
+    }
+    
+    .search-container {
+        order: 3;
+        width: 100%;
+        margin-top: 10px;
+    }
+    
+    .main-content {
+        margin-left: 0;
+    }
+    
+    .sidebar {
+        position: fixed;
+        top: 0;
+        left: 0;
+        height: 100%;
+        z-index: 1000;
+    }
+}
