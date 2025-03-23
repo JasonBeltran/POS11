@@ -9,9 +9,9 @@
 </head>
 <body>
     <div class="container">
-        <!-- Top Navigation Bar -->
+        <!-- navigation bar -->
         <div class="top-nav">
-            <!-- Sidebar Toggle + Logo -->
+            <!-- sidebar and logo, will also show when in shopping cart, go to shopping cart html to see -->
             <button class="toggle-sidebar" id="toggle-sidebar" title="Toggle Sidebar">
                 <i class="fas fa-bars"></i>
             </button>
@@ -20,15 +20,18 @@
                 RetailPro
             </div>
             
-            <!-- Centered Search Bar -->
+            <!-- centered search bar -- needs better work -->
             <div class="search-container">
                 <div class="search-bar">
                     <input type="text" class="search-input" placeholder="Search products by name, SKU, or barcode...">
-                    <button class="search-button"><i class="fas fa-search"></i> Search</button>
+                    <button class="search-button">
+                        <i class="fas fa-search"></i>
+                        <span>Search</span>
+                    </button>
                 </div>
             </div>
             
-            <!-- User Controls -->
+            <!-- users controls -->
             <div class="user-controls">
                 <button class="cart-button" id="cart-button" title="View Shopping Cart">
                     <i class="fas fa-shopping-cart"></i>
@@ -52,7 +55,7 @@
             <div class="category-tab">Refurbished</div>
         </div>
         
-        <!-- Main Content Area with Sidebar -->
+        <!-- main content  -->
         <div class="main-area">
             <!-- Sidebar - initially visible -->
             <aside class="sidebar" id="sidebar">
@@ -67,7 +70,7 @@
                     </li>
                     <li>
                         <i class="fas fa-shopping-cart"></i>
-                        Sales
+                        Shopping Cart
                     </li>
                     <li>
                         <i class="fas fa-users"></i>
@@ -96,7 +99,7 @@
                 </ul>
             </aside>
             
-            <!-- Main Content -->
+            <!-- main content -->
             <main class="main-content" id="main-content">
                 <div class="filter-options">
                     <div class="filter-label">Sort by:</div>
@@ -115,7 +118,7 @@
                     </select>
                 </div>
                 
-                <!-- Product Grid -->
+                <!-- product Grid -->
                 <div class="product-grid">
                     <div class="product-card">
                         <div class="product-image">
@@ -186,55 +189,6 @@
             </main>
         </div>
     </div>
-    
-    <script>
-        // Sidebar toggle functionality
-        document.getElementById('toggle-sidebar').addEventListener('click', function() {
-            const sidebar = document.getElementById('sidebar');
-            const mainContent = document.getElementById('main-content');
-            
-            sidebar.classList.toggle('collapsed');
-            mainContent.classList.toggle('full-width');
-            
-            // Change icon based on sidebar state
-            const icon = this.querySelector('i');
-            if (sidebar.classList.contains('collapsed')) {
-                icon.classList.remove('fa-bars');
-                icon.classList.add('fa-expand');
-            } else {
-                icon.classList.remove('fa-expand');
-                icon.classList.add('fa-bars');
-            }
-        });
-        
-        // Category tab selection
-        document.querySelectorAll('.category-tab').forEach(tab => {
-            tab.addEventListener('click', function() {
-                document.querySelector('.category-tab.active').classList.remove('active');
-                this.classList.add('active');
-            });
-        });
-        
-        // Sidebar menu item selection
-        document.querySelectorAll('.sidebar-menu li').forEach(item => {
-            item.addEventListener('click', function() {
-                document.querySelector('.sidebar-menu li.active').classList.remove('active');
-                this.classList.add('active');
-            });
-        });
-        
-        // Cart button click
-        document.getElementById('cart-button').addEventListener('click', function() {
-            alert('Redirecting to shopping cart...');
-            // window.location.href = 'cart.html';
-        });
-        
-        // Product card click
-        document.querySelectorAll('.product-card').forEach(card => {
-            card.addEventListener('click', function() {
-                alert('Item added to cart!');
-            });
-        });
-    </script>
+    <script src="index.js" defer></script>
 </body>
 </html>

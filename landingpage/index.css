@@ -1,12 +1,12 @@
 :root {
-    --primary-color: #18333d; /* Main yellow */
-    --secondary-color: #e3ecee; /* Light yellow */
-    --accent-color: #00ff88; /* Darker yellow/orange */
-    --text-color: #333333;
-    --border-color: #e3ecee; /* Light yellow border */
-    --success-color: #00ffbf; /* Gold yellow */
-    --hover-color: #32fff8; /* Bright yellow for hover states */
-    --dark-accent: #00adcc; /* Dark yellow/brown for contrast */
+    --primary-color: #011046; /* main top bar color */
+    --secondary-color: #ffffff; /* secondary color for top bar background (background color for image and sidebar navigation */
+    --accent-color: #5576bd74; /* Darker yellow/orange */
+    --text-color: #010134; /* self explanatory */
+    --logo-color: #dadffd; /* logo color ex company name and user name*/
+    --border-color: #e3ecee; /* just the boarded color, do not change */
+    --hover-color: #5576bd74; /* color of selected sidebar tab */
+    --dark-accent: #151e25; /* constrast */
 }
 
 * {
@@ -17,18 +17,18 @@
 }
 
 body {
-    background-color: #cde7ec; /* Very light yellow background */
+    background-color: #d2dde2; /* background */
     color: var(--text-color);
 }
 
-/* Main container layout */
+/* main container layout */
 .container {
     min-height: 100vh;
     display: flex;
     flex-direction: column;
 }
 
-/* New Top Navigation Bar - eBay style */
+/* top navigation */
 .top-nav {
     display: flex;
     align-items: center;
@@ -41,7 +41,7 @@ body {
 .toggle-sidebar {
     background: none;
     border: none;
-    color: var(--dark-accent);
+    color: var(--logo-color);
     font-size: 24px;
     cursor: pointer;
     margin-right: 10px;
@@ -53,59 +53,111 @@ body {
     display: flex;
     align-items: center;
     margin-right: 20px;
-    color: var(--dark-accent);
+    color: var(--logo-color);
 }
 
 .logo i {
     margin-right: 10px;
 }
 
-/* Search bar styling - centered */
+/* search bar */
 .search-container {
-    flex: 1;
     display: flex;
     justify-content: center;
-    max-width: 800px;
-    margin: 0 auto;
+    align-items: center;
+    width: 100%;
+    padding: 0 20px;
 }
 
 .search-bar {
     display: flex;
     align-items: center;
-    justify-content: center;
-    margin: 0 auto;
+    width: 100%;
     max-width: 600px;
+    height: 40px;
+    background-color: #f5f5f5;
+    border-radius: 24px;
+    overflow: hidden;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
+    transition: all 0.3s ease;
+    border: 1px solid #eeeeee;
+}
+
+.search-bar:hover, .search-bar:focus-within {
+    box-shadow: 0 2px 8px rgba(74, 108, 247, 0.15);
+    border-color: #e0e6ff;
 }
 
 .search-input {
-    width: 100%;
-    padding: 10px 20px;
-    border: 2px solid #ccc;
-    border-radius: 25px 0 0 25px;
+    flex: 1;
+    height: 100%;
+    padding: 0 16px;
+    border: none;
+    background-color: transparent;
+    font-size: 14px;
+    color: #333;
     outline: none;
-    font-size: 16px;
+}
+
+.search-input::placeholder {
+    color: #999;
+    font-size: 14px;
 }
 
 .search-button {
-    padding: 10px 20px;
-    border: 2px solid #ccc;
-    border-left: none;
-    border-radius: 0 25px 25px 0;
-    background-color: #007bff;
+    height: 100%;
+    padding: 0 20px;
+    background-color: #4a6cf7;
     color: white;
+    border: none;
     cursor: pointer;
-    font-size: 16px;
-}
-
-.search-button i {
-    margin-right: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    font-weight: 500;
+    transition: background-color 0.2s ease;
 }
 
 .search-button:hover {
-    background-color: #0056b3;
+    background-color: #3a5ce5;
 }
 
-/* User controls */
+.search-button i {
+    margin-right: 6px;
+    font-size: 14px;
+}
+
+/* responsive adjustments */
+@media (max-width: 992px) {
+    .search-bar {
+        max-width: 400px;
+    }
+}
+
+@media (max-width: 768px) {
+    .search-container {
+        padding: 0 10px;
+    }
+    
+    .search-bar {
+        height: 36px;
+    }
+    
+    .search-button {
+        padding: 0 15px;
+    }
+    
+    .search-button span {
+        display: none;
+    }
+    
+    .search-button i {
+        margin-right: 0;
+    }
+}
+
+/* user controls */
 .user-controls {
     display: flex;
     align-items: center;
@@ -133,6 +185,7 @@ body {
 .user-info {
     display: flex;
     align-items: center;
+    color: var(--logo-color);
 }
 
 .user-info img {
@@ -142,7 +195,7 @@ body {
     margin-right: 10px;
 }
 
-/* Categories bar - like eBay */
+/* categories tab - trying to go for the clean ebay style */
 .categories-bar {
     display: flex;
     background-color: #fff;
@@ -169,27 +222,27 @@ body {
     border-bottom-color: var(--hover-color);
 }
 
-/* Main content layout with sidebar */
+/* main content layout with sidebar */
 .main-area {
     display: flex;
     flex: 1;
 }
 
-/* Sidebar styling */
+/* sidebar styling */
 .sidebar {
     background-color: var(--secondary-color);
     width: 250px;
     border-right: 1px solid var(--border-color);
     transition: transform 0.3s ease, width 0.3s ease;
     overflow-y: auto;
-    height: calc(100vh - 115px); /* Account for top nav and categories */
+    height: calc(100vh - 115px); /* account for top nav and categories */
     position: fixed;
     top: 115px;
     left: 0;
     z-index: 10;
 }
 
-/* Collapsed sidebar */
+/* collapsed sidebar */
 .sidebar.collapsed {
     transform: translateX(-250px);
     width: 0;
@@ -223,7 +276,7 @@ body {
     text-align: center;
 }
 
-/* Main content */
+/* main content */
 .main-content {
     flex: 1;
     padding: 20px;
@@ -235,7 +288,7 @@ body {
     margin-left: 0;
 }
 
-/* Filter options */
+/* filter options */
 .filter-options {
     margin-bottom: 20px;
     display: flex;
@@ -255,7 +308,7 @@ body {
     background-color: white;
 }
 
-/* Product grid */
+/* product grid */
 .product-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
@@ -316,7 +369,7 @@ body {
     margin-top: 5px;
 }
 
-/* Responsive adjustments */
+/* responsive adjustments */
 @media (max-width: 768px) {
     .top-nav {
         flex-wrap: wrap;
