@@ -14,3 +14,15 @@ Supplier Hubs: Suppliers can create and manage their own listings.
 Product Browsing: Users can explore items categorized by suppliers.
 
 Secure Transactions: Safe and efficient checkout process.
+
+## Project layout
+
+### Frontend
+Before running `cd` into `/frontend/` and run `npm install` to install the dependencies
+
+Once dependencies are installed one can run `npm run start` to run the frontend
+
+### Backend
+Before running `cd` into `/backend/` and run `npm install` to install the dependencies
+
+Once dependencies are installed one can run `npm run start` to run the backend
