@@ -14,3 +14,26 @@ Supplier Hubs: Suppliers can create and manage their own listings.
 Product Browsing: Users can explore items categorized by suppliers.
 
 Secure Transactions: Safe and efficient checkout process.
+
+# Information
+
+## Project layout
+This project is divided into `/frontend/` and `/backend/` directories that house their respective modules.
+
+### Backend
+To begin `cd` into `/backend` and run `npm install` to fetch all the project dependencies which include 
+
+* Express
+* Nodemon
+
+Once dependencies are installed one may start the backend server by running `npm run start`
+
+### Frontend
+
+To begin `cd` into `/frontend` and run `npm install` to fetch all the project dependencies which include
+
+* react
+* react-scripts
+* (and friends)
+
+All routes are defined in `/frontend/src/App.js`
