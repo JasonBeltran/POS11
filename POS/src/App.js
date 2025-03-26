@@ -6,6 +6,7 @@ import Checkout from './checkout';
 import {BrowserRouter as Router, Route, Routes} from 'react-router-dom';
 import CustomerEntryForm from './customer-entry-form';
 import Login from './login';
+import SupplierForm from './SupplierForm';
 
 function App() {
 
@@ -13,11 +14,12 @@ function App() {
   return (
     <Router>
       <Routes>
-        <Route path = "/" element = {<Landing />} /> {} 
+        <Route path = "/" element = {<Landing />} /> {}
         <Route path = "/login" element = {<Login />} />
         <Route path = "/customer-entry-form" element = {<CustomerEntryForm />} />
         <Route path = "/shopping-cart"  element = {<ShoppingCart/>} />
         <Route path = "/checkout"  element = {<Checkout/>} />
+        <Route path = "/supplier-entry-form" element = {<SupplierForm/>} />
 
       </Routes>
     </Router>
