@@ -13,16 +13,23 @@ const Login = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        setError('');
         try {
             const response = await axios.post('http://localhost:5000/login', {
-                email,
-                password,
-                typeOfUser
+              email,
+              password,
+              typeOfUser
             });
-        
-            console.log('Login success:' , response.data);
+            
+            if (response.data?.user){
+                localStorage.setItem('user', JSON.stringify(response.data.user));
+                window.location.href = '/';
+            }else {
+                throw new Error('No user data received');
+            }
         } catch (err) {
-            setError(err.response?.data || 'Login failed');
+            const errorMessage = err.response?.data?.message || err.message || 'Login failed';
+            setError (errorMessage);
         }
     };
 
@@ -74,7 +81,7 @@ const Login = () => {
                             <button type = "submit">Login</button>
                         </form>
                         <p>
-                            Don't have an account? <Link to = "/customer-Entry-Form">Sign Up</Link> 
+                            Don't have an account? <Link to = {typeOfUser === 'supplier' ? '/supplier-entry-form' : '/customer-entry-form'}>Sign Up</Link> 
                         </p>
                     </div>
                 </div>

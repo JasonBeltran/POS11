@@ -10,11 +10,11 @@ const CustomerEntryForm = () => {
     const [middleInitial, setmiddleInitial] = useState('');
     const [lastName, setLastName] = useState('');
     const [payment, setPayment] = useState("Select");
-    const [password, setPassword] = useState('');
     const [dob, setDob] = useState(null);
     const [phoneNumber, setPhoneNumber] = useState('');
+    const [aptNum, setAptNum] = useState(null);
+    const [password, setPassword] = useState('');
     const [email, setEmail] = useState('');
-    const [aptNum, setAptNum] = useState('');
     const [houseNum, sethouseNum] = useState('');
     const [street, setStreet] = useState('');
     const [city, setCity] = useState('');
@@ -30,23 +30,24 @@ const CustomerEntryForm = () => {
     {/* Function to place all the values into customer once hit submit */}
     const handleSubmit = async (e) => {
         e.preventDefault();
-
         try {
-            const response = await axios.post('http://localhost:5000/customer-entry-form', {
-                firstName, middleInitial, lastName, phoneNumber, email, aptNum, houseNum, street, city, selectedState, zip, selectedCountry, dob, payment, password
-            });
-        
-            setSuccess(true);
-            setError('');
-            console.log('Signup success:', response.data);
+          const response = await axios.post('http://localhost:5000/customer-entry-form', {
+            firstName, middleInitial, lastName, phoneNumber, email, aptNum, houseNum, street, city, selectedState, zip, selectedCountry, dob, payment, password
+          });
+          if (response.data?.user){
+            localStorage.setItem('user', JSON.stringify(response.data.user));
+            window.location.href = '/';
+        }else {
+            throw new Error('No user data received');
+        }
         } catch (err) {
-            setError(err.response?.data || 'Signup failed');
-            setSuccess(false);
+            const errorMessage = err.response?.data?.message || err.message || 'Sign up failed';
+            setError (errorMessage);
         }
     }
 
     return (
-        <div className="first">
+        <div className="first-customer">
             <div className="customerEntryForm">
                 <h1>Customer Sign Up</h1>
                 <form onSubmit={handleSubmit}>
@@ -98,7 +99,7 @@ const CustomerEntryForm = () => {
                                 value={payment}
                                 onChange={(e) => setPayment(e.target.value)}
                             >
-                                <option value="Select">Other</option>
+                                <option value="Select">Select</option>
                                 <option value="Visa">Visa</option>
                                 <option value="Mastercard">Mastercard</option>
                                 <option value="American Express">American Express</option>
@@ -118,18 +119,16 @@ const CustomerEntryForm = () => {
                             <input
                                 type="email"
                                 id="email"
-                                pattern=".+@(gmail\.com|yahoo\.com|outlook\.com)"
-                                maxLength={30}
-                                value={email}
                                 onChange={(e) => setEmail(e.target.value)}
+                                maxLength={30}
                                 required
                             />
                         </div>
                         <div className="form-group">
-                            <label>Password</label>
+                            <label htmlFor="Password">Enter Password</label>
                             <input
                                 type="password"
-                                value={password}
+                                maxLength={30}
                                 onChange={(e) => setPassword(e.target.value)}
                                 required
                             />
