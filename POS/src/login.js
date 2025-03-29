@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import axios from 'axios';
 import './login.css';
 
 
@@ -8,11 +9,28 @@ const Login = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [typeOfUser, setTypeOfUser] = useState('customer');
+    const [error, setError] = useState('');
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        console.log(email, password, typeOfUser);
-        //we need to add the logic that would get the correct password and email for the customer
+        setError('');
+        try {
+            const response = await axios.post('http://localhost:5000/login', {
+              email,
+              password,
+              typeOfUser
+            });
+            
+            if (response.data?.user){
+                localStorage.setItem('user', JSON.stringify(response.data.user));
+                window.location.href = '/';
+            }else {
+                throw new Error('No user data received');
+            }
+        } catch (err) {
+            const errorMessage = err.response?.data?.message || err.message || 'Login failed';
+            setError (errorMessage);
+        }
     };
 
 
@@ -63,7 +81,7 @@ const Login = () => {
                             <button type = "submit">Login</button>
                         </form>
                         <p>
-                            Don't have an account? <Link to = "/customer-Entry-Form">Sign Up</Link> 
+                            Don't have an account? <Link to = {typeOfUser === 'supplier' ? '/supplier-entry-form' : '/customer-entry-form'}>Sign Up</Link> 
                         </p>
                     </div>
                 </div>

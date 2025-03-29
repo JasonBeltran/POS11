@@ -1,5 +1,6 @@
 //needs the "country-state-city" library
 import { useState } from "react";
+import axios from 'axios';
 import { Country, State } from 'country-state-city';
 import './customer-entry-form.css';
 
@@ -11,26 +12,42 @@ const CustomerEntryForm = () => {
     const [payment, setPayment] = useState("Select");
     const [dob, setDob] = useState(null);
     const [phoneNumber, setPhoneNumber] = useState('');
-    const [aptNum, setAptNum] = useState('');
+    const [aptNum, setAptNum] = useState(null);
+    const [password, setPassword] = useState('');
+    const [email, setEmail] = useState('');
     const [houseNum, sethouseNum] = useState('');
     const [street, setStreet] = useState('');
     const [city, setCity] = useState('');
     const [zip, setZip] = useState('');
     const [selectedCountry, setSelectedCountry] = useState('');
     const [selectedState, setSelectedState] = useState('');
+    const [error, setError] = useState('');
+    const [success, setSuccess] = useState(false);
 
     const countries = Country.getAllCountries();
     const state = selectedCountry ? State.getStatesOfCountry(selectedCountry) : [];
 
     {/* Function to place all the values into customer once hit submit */}
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        const customer = { firstName, middleInitial, lastName, dob, phoneNumber, aptNum, houseNum, street, city, zip, selectedCountry, selectedState, payment };
-        console.log(customer);
+        try {
+          const response = await axios.post('http://localhost:5000/customer-entry-form', {
+            firstName, middleInitial, lastName, phoneNumber, email, aptNum, houseNum, street, city, selectedState, zip, selectedCountry, dob, payment, password
+          });
+          if (response.data?.user){
+            localStorage.setItem('user', JSON.stringify(response.data.user));
+            window.location.href = '/';
+        }else {
+            throw new Error('No user data received');
+        }
+        } catch (err) {
+            const errorMessage = err.response?.data?.message || err.message || 'Sign up failed';
+            setError (errorMessage);
+        }
     }
 
     return (
-        <div className="first">
+        <div className="first-customer">
             <div className="customerEntryForm">
                 <h1>Customer Sign Up</h1>
                 <form onSubmit={handleSubmit}>
@@ -94,7 +111,6 @@ const CustomerEntryForm = () => {
                                 type="tel"
                                 value={phoneNumber}
                                 onChange={(e) => setPhoneNumber(e.target.value)}
-                                pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
                                 required
                             />
                         </div>
@@ -103,8 +119,17 @@ const CustomerEntryForm = () => {
                             <input
                                 type="email"
                                 id="email"
-                                pattern=".+@example\.com"
+                                onChange={(e) => setEmail(e.target.value)}
                                 maxLength={30}
+                                required
+                            />
+                        </div>
+                        <div className="form-group">
+                            <label htmlFor="Password">Enter Password</label>
+                            <input
+                                type="password"
+                                maxLength={30}
+                                onChange={(e) => setPassword(e.target.value)}
                                 required
                             />
                         </div>

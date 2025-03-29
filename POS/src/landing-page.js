@@ -17,6 +17,7 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 
 function Landing() {
+  const user = JSON.parse(localStorage.getItem('user'));
   // Load the sidebar state from localStorage (or default to false)
   const [sidebarCollapsed, setSidebarCollapsed] = useState(
     JSON.parse(localStorage.getItem('sidebarCollapsed')) || false
@@ -42,10 +43,6 @@ function Landing() {
     setActiveMenuItem(menuItem);
   };
 
-  // const handleCartClick = () => {
-  //   alert('Redirecting to shopping cart...');
-  //   useNagivate()
-  // };
 
   const handleProductClick = () => {
     alert('Item added to cart!');
@@ -72,14 +69,15 @@ function Landing() {
           </div>
         </div>
         <div className="user-controls">
-          <Link to="/shopping-cart" onClick={() => alert('Redirecting to shopping cart...')}>
+          <Link to="/shopping-cart">
             <button className="cart-button" title="View Shopping Cart">
               <FontAwesomeIcon icon={faShoppingCart} />
             </button>
           </Link>
           <div className="user-info">
-            <img src="/api/placeholder/40/40" alt="User avatar" />
-            <span>Alex</span>
+            <Link to = "user-page">
+              <button className = "user-button">{user.first_name}</button>
+            </Link>
           </div>
         </div>
       </div>

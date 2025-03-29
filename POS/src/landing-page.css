@@ -131,7 +131,24 @@
     border: none;
     transition: background-color 0.2s;
   }
-  
+
+  .user-button {
+    background-color: var(--primary-color);
+    color: var(--secondary-color);
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    border: none;
+    transition: background-color 0.2s;
+  }
+
+  .user-button:hover {
+    background-color: var(--hover-color);
+  }
   .cart-button:hover {
     background-color: var(--hover-color);
   }
