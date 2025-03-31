@@ -1,6 +1,6 @@
 //needs the "country-state-city" library
 import { useState } from "react";
-import axios from 'axios';
+import axios from "axios";
 import { Country, State } from 'country-state-city';
 import './customer-entry-form.css';
 
@@ -31,7 +31,7 @@ const CustomerEntryForm = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-          const response = await axios.post('http://localhost:5000/customer-entry-form', {
+          const response = await axios('http://localhost:5000/api/customer-entry-form', {
             firstName, middleInitial, lastName, phoneNumber, email, aptNum, houseNum, street, city, selectedState, zip, selectedCountry, dob, payment, password
           });
           if (response.data?.user){
