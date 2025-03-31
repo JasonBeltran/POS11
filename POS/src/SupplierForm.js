@@ -31,7 +31,7 @@ const CustomerEntryForm = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-          const response = await axios.post('http://localhost:5000/supplier-entry-form', {
+          const response = await axios.post('http://localhost:5000/api/supplier-entry-form', {
             company, firstName, middleInitial, lastName, phoneNumber, email, aptNum, houseNum, street, city, selectedState, zip, selectedCountry, password, dob
           });
           if (response.data?.user){
